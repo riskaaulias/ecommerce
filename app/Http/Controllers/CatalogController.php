@@ -1,4 +1,8 @@
 <?php
+// ================================================
+// FILE: app/Http/Controllers/CatalogController.php
+// FUNGSI: Menangani halaman katalog dan detail produk
+// ================================================
 
 namespace App\Http\Controllers;
 

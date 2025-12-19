@@ -1,3 +1,8 @@
+{{-- ================================================
+     FILE: resources/views/home.blade.php
+     FUNGSI: Halaman utama website
+     ================================================ --}}
+
 @extends('layouts.app')
 
 @section('title', 'Beranda')
