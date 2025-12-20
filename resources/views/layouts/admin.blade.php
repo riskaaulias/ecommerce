@@ -1,142 +1,100 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+<!-- [Head] start -->
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Home | Mantis Bootstrap 5 Admin Template</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
+  <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
+  <meta name="author" content="CodedThemes">
 
-    <title>@yield('title') - Admin Panel</title>
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
+<!-- [Tabler Icons] https://tablericons.com -->
+<link rel="stylesheet" href="{{asset('assets/fonts/tabler-icons.min.css')}}" >
+<!-- [Feather Icons] https://feathericons.com -->
+<link rel="stylesheet" href="{{asset('assets/fonts/feather.css')}}" >
+<!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+<link rel="stylesheet" href="{{asset('assets/fonts/fontawesome.css')}}" >
+<!-- [Material Icons] https://fonts.google.com/icons -->
+<link rel="stylesheet" href="{{asset('assets/fonts/material.css')}}" >
+<!-- [Template CSS Files] -->
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}" id="main-style-link" >
+<link rel="stylesheet" href="{{asset('assets/css/style-preset.css')}}" >
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        .sidebar {
-            min-height: 100vh;
-            background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
-        }
-        .sidebar .nav-link {
-            color: rgba(255,255,255,0.7);
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin: 4px 12px;
-            transition: all 0.2s;
-        }
-        .sidebar .nav-link:hover,
-        .sidebar .nav-link.active {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
-        .sidebar .nav-link i {
-            width: 24px;
-        }
-    </style>
-    @stack('styles')
 </head>
-<body class="bg-light">
-    <div class="d-flex">
-        {{-- Sidebar --}}
-        <div class="sidebar d-flex flex-column" style="width: 260px;">
-            {{-- Brand --}}
-            <div class="p-3 border-bottom border-secondary">
-                <a href="{{ route('admin.dashboard') }}" class="text-white text-decoration-none d-flex align-items-center">
-                    <i class="bi bi-shop fs-4 me-2"></i>
-                    <span class="fs-5 fw-bold">Admin Panel</span>
-                </a>
-            </div>
+<!-- [Head] end -->
+<!-- [Body] Start -->
 
-            {{-- Navigation --}}
-            <nav class="flex-grow-1 py-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}"
-                           class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                            <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                        </a>
-                    </li>
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+  <!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+<!-- [ Pre-loader ] End -->
 
-                    <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}"
-                           class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-                            <i class="bi bi-box-seam me-2"></i> Produk
-                        </a>
-                    </li>
+ <!-- [ Sidebar Menu ] start -->
+@include('layouts.partials.sidebar')
+<!-- [ Sidebar Menu ] end --> 
 
-                    <li class="nav-item">
-                        <a href="{{ route('admin.categories.index') }}"
-                           class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-                            <i class="bi bi-folder me-2"></i> Kategori
-                        </a>
-                    </li>
+ <!-- [ Header Topbar ] start -->
+@include('layouts.partials.navbar')
 
-                    <li class="nav-item">
-                        <a href="{{ route('admin.orders.index') }}"
-                           class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                            <i class="bi bi-receipt me-2"></i> Pesanan
-                        </a>
-                    </li>
+<!-- [ Header ] end -->
 
-                    <li class="nav-item">
-                           class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                            <i class="bi bi-people me-2"></i> Pengguna
-                        </a>
-                    </li>
 
-                    <li class="nav-item mt-3">
-                        <span class="nav-link text-muted small text-uppercase">Laporan</span>
-                    </li>
 
-                    <li class="nav-item">
-                           class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
-                            <i class="bi bi-graph-up me-2"></i> Laporan Penjualan
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+  <!-- [ Main Content ] start -->
+@include('partials.flash-messages')
+@yield('content')
+ 
+  <!-- [ Main Content ] end -->
+  
 
-            {{-- User Info --}}
-            <div class="p-3 border-top border-secondary">
-                <div class="d-flex align-items-center text-white">
-                    <img src="{{ auth()->user()->avatar_url }}"
-                         class="rounded-circle me-2" width="36" height="36">
-                    <div class="flex-grow-1">
-                        <div class="small fw-medium">{{ auth()->user()->name }}</div>
-                        <div class="small text-muted">Administrator</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+@include('layouts.partials.footer')
+  <!-- [Page Specific JS] start -->
+  <script src="{{asset('assets/js/plugins/apexcharts.min.js')}}"></script>
+  <script src="{{asset('assets/js/pages/dashboard-default.js')}}"></script>
+  <!-- [Page Specific JS] end -->
+  <!-- Required Js -->
+  <script src="{{asset('assets/js/plugins/popper.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/simplebar.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/js/fonts/custom-font.js')}}"></script>
+  <script src="{{asset('assets/js/pcoded.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/feather.min.js')}}"></script>
 
-        {{-- Main Content --}}
-        <div class="flex-grow-1">
-            {{-- Top Bar --}}
-            <header class="bg-white shadow-sm py-3 px-4 d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">@yield('page-title', 'Dashboard')</h4>
-                <div class="d-flex align-items-center">
-                    <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-sm me-2" target="_blank">
-                        <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Toko
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-box-arrow-right me-1"></i> Logout
-                        </button>
-                    </form>
-                </div>
-            </header>
+  
+  
+  
+  
+  <script>layout_change('light');</script>
+  
+  
+  
+  
+  <script>change_box_container('false');</script>
+  
+  
+  
+  <script>layout_rtl_change('false');</script>
+  
+  
+  <script>preset_change("preset-1");</script>
+  
+  
+  <script>font_change("Public-Sans");</script>
+  
+    
 
-            {{-- Flash Messages --}}
-            <div class="px-4 pt-3">
-                @include('partials.flash-messages')
-            </div>
-
-            {{-- Page Content --}}
-            <main class="p-4">
-                @yield('content')
-            </main>
-        </div>
-    </div>
-
-    @stack('scripts')
 </body>
+<!-- [Body] end -->
+
 </html>
