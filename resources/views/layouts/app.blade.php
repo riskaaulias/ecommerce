@@ -126,6 +126,7 @@ FUNGSI: Master layout untuk halaman customer/publik
         }
       }
     </script>
-</body>
+    @stack('scripts')
+  </body>
 
-</html>
+  </html>
