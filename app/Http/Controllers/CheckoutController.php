@@ -12,7 +12,7 @@ class CheckoutController extends Controller
     {
         // Pastikan keranjang tidak kosong
         $cart = auth()->user()->cart;
-        if (!$cart || $cart->items->isEmpty()) {
+        if (! $cart || $cart->items->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang kosong.');
         }
 
@@ -22,8 +22,8 @@ class CheckoutController extends Controller
     public function store(Request $request, OrderService $orderService)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'name'    => 'required|string|max:255',
+            'phone'   => 'required|string|max:20',
             'address' => 'required|string|max:500',
         ]);
 

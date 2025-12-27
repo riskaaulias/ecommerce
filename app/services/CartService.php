@@ -61,7 +61,7 @@ class CartService
 
             $cart->items()->create([
                 'product_id' => $product->id,
-                'quantity' => $quantity,
+                'quantity'   => $quantity,
             ]);
         }
 
@@ -75,7 +75,7 @@ class CartService
      */
     public function updateQuantity(int $itemId, int $quantity): void
     {
-        $item = CartItem::findOrFail($itemId);
+        $item    = CartItem::findOrFail($itemId);
         $product = $item->product;
 
         // Security Check: Pastikan item ini MILIK cart user yang sedang login/aktif.
@@ -118,7 +118,9 @@ class CartService
         $guestCart = Cart::where('session_id', $sessionId)->with('items')->first();
 
         // Jika tidak ada belanjaan tamu, selesai.
-        if (!$guestCart) return;
+        if (! $guestCart) {
+            return;
+        }
 
         // 2. Ambil/Buat cart user yang baru login (tujuan)
         $userCart = Cart::firstOrCreate(['user_id' => Auth::id()]);
