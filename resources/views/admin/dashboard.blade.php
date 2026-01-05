@@ -1,289 +1,209 @@
 @extends('layouts.admin')
+
+@section('title', 'Dashboard')
+
 @section('content')
-    <div class="row">
-        <!-- [ sample-page ] start -->
-        <div class="col-md-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Page Views</h6>
-                    <h4 class="mb-3">4,42,236 <span class="badge bg-light-primary border border-primary"><i
-                                class="ti ti-trending-up"></i> 59.3%</span></h4>
-                    <p class="mb-0 text-muted text-sm">You made an extra <span class="text-primary">35,000</span> this year
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Users</h6>
-                    <h4 class="mb-3">78,250 <span class="badge bg-light-success border border-success"><i
-                                class="ti ti-trending-up"></i> 70.5%</span></h4>
-                    <p class="mb-0 text-muted text-sm">You made an extra <span class="text-success">8,900</span> this year
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
-                    <h4 class="mb-3">18,800 <span class="badge bg-light-warning border border-warning"><i
-                                class="ti ti-trending-down"></i> 27.4%</span></h4>
-                    <p class="mb-0 text-muted text-sm">You made an extra <span class="text-warning">1,943</span> this year
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Sales</h6>
-                    <h4 class="mb-3">$35,078 <span class="badge bg-light-danger border border-danger"><i
-                                class="ti ti-trending-down"></i> 27.4%</span></h4>
-                    <p class="mb-0 text-muted text-sm">You made an extra <span class="text-danger">$20,395</span> this year
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="row g-4 mb-4">
+        {{-- 1. Stats Cards Grid --}}
 
-        <div class="col-md-12 col-xl-8">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h5 class="mb-0">Unique Visitor</h5>
-                <ul class="nav nav-pills justify-content-end mb-0" id="chart-tab-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="chart-tab-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#chart-tab-home" type="button" role="tab" aria-controls="chart-tab-home"
-                            aria-selected="true">Month</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="chart-tab-profile-tab" data-bs-toggle="pill"
-                            data-bs-target="#chart-tab-profile" type="button" role="tab"
-                            aria-controls="chart-tab-profile" aria-selected="false">Week</button>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
+        {{-- Revenue Card --}}
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm border-start border-4 border-success h-100">
                 <div class="card-body">
-                    <div class="tab-content" id="chart-tab-tabContent">
-                        <div class="tab-pane" id="chart-tab-home" role="tabpanel" aria-labelledby="chart-tab-home-tab"
-                            tabindex="0">
-                            <div id="visitor-chart-1"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold mb-1" style="font-size: 0.8rem">Total Pendapatan</p>
+                            <h4 class="fw-bold mb-0 text-success">
+                                Rp {{ number_format($stats['total_revenue'], 0, ',', '.') }}
+                            </h4>
                         </div>
-                        <div class="tab-pane show active" id="chart-tab-profile" role="tabpanel"
-                            aria-labelledby="chart-tab-profile-tab" tabindex="0">
-                            <div id="visitor-chart"></div>
+                        <div class="bg-success bg-opacity-10 p-3 rounded">
+                            <i class="bi bi-wallet2 text-success fs-3"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-xl-4">
-            <h5 class="mb-3">Income Overview</h5>
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">This Week Statistics</h6>
-                    <h3 class="mb-3">$7,650</h3>
-                    <div id="income-overview-chart"></div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-12 col-xl-8">
-            <h5 class="mb-3">Recent Orders</h5>
-            <div class="card tbl-card">
+        {{-- Pending Action Card --}}
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm border-start border-4 border-warning h-100">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-borderless mb-0">
-                            <thead>
-                                <tr>
-                                    <th>TRACKING NO.</th>
-                                    <th>PRODUCT NAME</th>
-                                    <th>TOTAL ORDER</th>
-                                    <th>STATUS</th>
-                                    <th class="text-end">TOTAL AMOUNT</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Camera Lens</td>
-                                    <td>40</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-danger f-10 m-r-5"></i>Rejected</span>
-                                    </td>
-                                    <td class="text-end">$40,570</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Laptop</td>
-                                    <td>300</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-warning f-10 m-r-5"></i>Pending</span>
-                                    </td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Mobile</td>
-                                    <td>355</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-success f-10 m-r-5"></i>Approved</span></td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Camera Lens</td>
-                                    <td>40</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-danger f-10 m-r-5"></i>Rejected</span>
-                                    </td>
-                                    <td class="text-end">$40,570</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Laptop</td>
-                                    <td>300</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-warning f-10 m-r-5"></i>Pending</span>
-                                    </td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Mobile</td>
-                                    <td>355</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-success f-10 m-r-5"></i>Approved</span></td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Camera Lens</td>
-                                    <td>40</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-danger f-10 m-r-5"></i>Rejected</span>
-                                    </td>
-                                    <td class="text-end">$40,570</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Laptop</td>
-                                    <td>300</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-warning f-10 m-r-5"></i>Pending</span>
-                                    </td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Mobile</td>
-                                    <td>355</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-success f-10 m-r-5"></i>Approved</span></td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-muted">84564564</a></td>
-                                    <td>Mobile</td>
-                                    <td>355</td>
-                                    <td><span class="d-flex align-items-center gap-2"><i
-                                                class="fas fa-circle text-success f-10 m-r-5"></i>Approved</span></td>
-                                    <td class="text-end">$180,139</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold mb-1" style="font-size: 0.8rem">Perlu Diproses</p>
+                            <h4 class="fw-bold mb-0 text-warning">
+                                {{ $stats['pending_orders'] }}
+                            </h4>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 p-3 rounded">
+                            <i class="bi bi-box-seam text-warning fs-3"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-xl-4">
-            <h5 class="mb-3">Analytics Report</h5>
-            <div class="card">
-                <div class="list-group list-group-flush">
-                    <a href="#"
-                        class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">Company
-                        Finance Growth<span class="h5 mb-0">+45.14%</span></a>
-                    <a href="#"
-                        class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">Company
-                        Expenses Ratio<span class="h5 mb-0">0.58%</span></a>
-                    <a href="#"
-                        class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">Business
-                        Risk Cases<span class="h5 mb-0">Low</span></a>
-                </div>
-                <div class="card-body px-2">
-                    <div id="analytics-report-chart"></div>
+
+        {{-- Low Stock Card --}}
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm border-start border-4 border-danger h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold mb-1" style="font-size: 0.8rem">Stok Menipis</p>
+                            <h4 class="fw-bold mb-0 text-danger">
+                                {{ $stats['low_stock'] }}
+                            </h4>
+                        </div>
+                        <div class="bg-danger bg-opacity-10 p-3 rounded">
+                            <i class="bi bi-exclamation-triangle text-danger fs-3"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-12 col-xl-8">
-            <h5 class="mb-3">Sales Report</h5>
-            <div class="card">
+        {{-- Total Products --}}
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm border-start border-4 border-primary h-100">
                 <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">This Week Statistics</h6>
-                    <h3 class="mb-0">$7,650</h3>
-                    <div id="sales-report-chart"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold mb-1" style="font-size: 0.8rem">Total Produk</p>
+                            <h4 class="fw-bold mb-0 text-primary">
+                                {{ $stats['total_products'] }}
+                            </h4>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                            <i class="bi bi-tags text-primary fs-3"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-xl-4">
-            <h5 class="mb-3">Transaction History</h5>
-            <div class="card">
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="avtar avtar-s rounded-circle text-success bg-light-success">
-                                    <i class="ti ti-gift f-18"></i>
+    </div>
+
+    <div class="row g-4">
+        {{-- 2. Revenue Chart --}}
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white py-3">
+                    <h5 class="card-title mb-0">Grafik Penjualan (7 Hari)</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- 3. Recent Orders --}}
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white py-3">
+                    <h5 class="card-title mb-0">Pesanan Terbaru</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @foreach($recentOrders as $order)
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-4 py-3">
+                                <div>
+                                    <div class="fw-bold text-primary">#{{ $order->order_number }}</div>
+                                    <small class="text-muted">{{ $order->user->name }}</small>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-bold">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</div>
+                                    <span class="badge rounded-pill
+                                        {{ $order->payment_status == 'paid' ? 'bg-success bg-opacity-10 text-success' : 'bg-secondary bg-opacity-10 text-secondary' }}">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Order #002434</h6>
-                                <p class="mb-0 text-muted">Today, 2:00 AM</P>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h6 class="mb-1">+ $1,430</h6>
-                                <p class="mb-0 text-muted">78%</P>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="avtar avtar-s rounded-circle text-primary bg-light-primary">
-                                    <i class="ti ti-message-circle f-18"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Order #984947</h6>
-                                <p class="mb-0 text-muted">5 August, 1:45 PM</P>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h6 class="mb-1">- $302</h6>
-                                <p class="mb-0 text-muted">8%</P>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="avtar avtar-s rounded-circle text-danger bg-light-danger">
-                                    <i class="ti ti-settings f-18"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Order #988784</h6>
-                                <p class="mb-0 text-muted">7 hours ago</P>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h6 class="mb-1">- $682</h6>
-                                <p class="mb-0 text-muted">16%</P>
-                            </div>
-                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="card-footer bg-white text-center py-3">
+                    <a href="{{ route('admin.orders.index') }}" class="text-decoration-none fw-bold">
+                        Lihat Semua Pesanan &rarr;
                     </a>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- 4. Top Selling Products --}}
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-header bg-white py-3">
+            <h5 class="card-title mb-0">Produk Terlaris</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-4">
+                @foreach($topProducts as $product)
+                    <div class="col-6 col-md-2 text-center">
+                        <div class="card h-100 border-0 hover-shadow transition">
+                            <img src="{{ $product->image_url }}" class="card-img-top rounded mb-2" style="max-height: 100px; object-fit: cover;">
+                            <h6 class="card-title text-truncate" style="font-size: 0.9rem">{{ $product->name }}</h6>
+                            <small class="text-muted">{{ $product->sold }} terjual</small>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    {{-- Script Chart.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+
+        // Data dari Controller (Blade to JS)
+        const labels = {!! json_encode($revenueChart->pluck('date')) !!};
+        const data = {!! json_encode($revenueChart->pluck('total')) !!};
+
+        new Chart(ctx, {
+            type: 'line', // Jenis grafik: Line chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Pendapatan (Rp)',
+                    data: data,
+                    borderColor: '#0d6efd', // Bootstrap Primary Color
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3, // Membuat garis sedikit melengkung (smooth)
+                    fill: true,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar Chart menyesuaikan container
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                // Format Tooltip jadi Rupiah
+                                return 'Rp ' + new Intl.NumberFormat('id-ID').format(context.raw);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [2, 4] },
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + new Intl.NumberFormat('id-ID', { notation: "compact" }).format(value);
+                            }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

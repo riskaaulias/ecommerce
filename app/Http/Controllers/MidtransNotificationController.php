@@ -7,9 +7,21 @@ use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Events\OrderPaidEvent;
+
 
 class MidtransNotificationController extends Controller
 {
+        private function setSuccess(Order $order)
+    {
+        $order->update([
+            'status' => 'paid',
+            'paid_at => now()',
+        ]);
+
+        // Fire & Forget
+        event(new OrderPaidEvent($order));
+    }
     /**
      * Handle incoming webhook notification from Midtrans.
      * URL: POST /midtrans/notification
@@ -237,4 +249,5 @@ class MidtransNotificationController extends Controller
 
         // TODO: Logic tambahan untuk refund
     }
+    
 }
