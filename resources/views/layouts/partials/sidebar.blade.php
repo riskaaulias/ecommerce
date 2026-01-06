@@ -20,24 +20,18 @@
             <i class="ti ti-dashboard"></i>
           </li>
           <li class="pc-item">
-            <a href="../elements/bc_typography.html" class="pc-link">
+            <a href="{{route('admin.products.index')}}" class="pc-link">
               <span class="pc-micon"><i class="ti ti-typography"></i></span>
-              <span class="pc-mtext">Typography</span>
+              <span class="pc-mtext">Products</span>
             </a>
           </li>
           <li class="pc-item">
-            <a href="../elements/bc_color.html" class="pc-link">
+            <a href="{{route('admin.categories.index')}}" class="pc-link">
               <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
-              <span class="pc-mtext">Color</span>
+              <span class="pc-mtext">Categories</span>
             </a>
           </li>
-          <li class="pc-item">
-            <a href="../elements/icon-tabler.html" class="pc-link">
-              <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
-              <span class="pc-mtext">Icons</span>
-            </a>
-          </li>
-
+        
           <li class="pc-item pc-caption">
             <label>Pages</label>
             <i class="ti ti-news"></i>

@@ -150,7 +150,7 @@
         </div>
     </div>
 
-    {{-- Script Chart.js --}}
+    {{-- Script Chart.js
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('revenueChart').getContext('2d');
@@ -205,5 +205,5 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 @endsection
