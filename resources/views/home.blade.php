@@ -17,15 +17,14 @@
                         Belanja Online Mudah & Terpercaya
                     </h1>
                     <p class="lead mb-4">
-                        Temukan berbagai produk berkualitas dengan harga terbaik.
-                        Gratis ongkir untuk pembelian pertama!
+                        Cari sepeda lipat favoritmu dengan kualitas terbaik dan harga bersahabat. Gratis ongkir untuk pembelian pertama!
                     </p>
                     <a href="{{ route('catalog.index') }}" class="btn btn-light btn-lg">
                         <i class="bi bi-bag me-2"></i>Mulai Belanja
                     </a>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block text-center">
-                    <img src="{{ asset('images/hero-shopping.svg') }}"
+                    <img src="{{ asset('public/assets/images/sepeda.png') }}"
                          alt="Shopping" class="img-fluid" style="max-height: 400px;">
                 </div>
             </div>

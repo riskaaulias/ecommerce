@@ -3,7 +3,7 @@
         {{-- Logo & Brand --}}
         <a class="navbar-brand text-primary" href="{{ route('home') }}">
             <i class="bi bi-bag-heart-fill me-2"></i>
-            Outdoor Store
+            FlexiGowes
         </a>
 
         {{-- Mobile Toggle --}}
