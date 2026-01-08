@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
         {{-- Logo & Brand --}}
-        <a class="navbar-brand text-primary" href="{{ route('home') }}">
-            <i class="bi bi-bag-heart-fill me-2"></i>
-            FlexiGowes
-        </a>
+   <a class="navbar-brand text-primary" href="{{ route('home') }}">
+    <i class="bi bi-bicycle me-2 icon-bike"></i>
+    FlexiGowes
+</a>
+
 
         {{-- Mobile Toggle --}}
         <button class="navbar-toggler" type="button"

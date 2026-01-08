@@ -31,6 +31,12 @@
               <span class="pc-mtext">Categories</span>
             </a>
           </li>
+          <li class="pc-item">
+            <a href="{{route('admin.reports.sales')}}" class="pc-link">
+              <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
+              <span class="pc-mtext">Reports</span>
+            </a>
+          </li>
         
           <li class="pc-item pc-caption">
             <label>Pages</label>

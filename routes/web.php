@@ -127,3 +127,11 @@ Route::controller(GoogleController::class)->group(function () {
 
 Route::post('midtrans/notification', [MidtransNotificationController::class, 'handle'])
     ->name('midtrans.notification');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+    })->name('verification.send');
+});
